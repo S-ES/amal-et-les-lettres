@@ -158,7 +158,7 @@ body {
 .article-btn:hover, .article-btn:active { background: var(--pink-deep); color: white; }
 
 /* === WRITING === */
-.model-letter { font-size: 5rem; text-align: center; color: var(--violet-deep); margin-bottom: 10px; font-family: 'Baloo Bhaijaan 2', sans-serif; }
+.model-letter { font-size: 3.5rem; text-align: center; color: var(--violet-deep); margin-bottom: 10px; font-family: 'Baloo Bhaijaan 2', sans-serif; }
 .model-word { font-size: 1.2rem; text-align: center; color: #999; margin-bottom: 16px; }
 .canvas-container { position: relative; margin: 0 auto; width: 100%; max-width: 500px; }
 canvas.write-canvas {
@@ -177,8 +177,8 @@ canvas.write-canvas {
 .tab-btn.active { background: var(--pink-deep); color: white; border-color: var(--pink-deep); }
 .letter-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
 .letter-select-btn {
-  width: 56px; height: 56px; border-radius: 14px; border: 2px solid #ddd;
-  background: white; font-size: 1.6rem; cursor: pointer; transition: all 0.15s;
+  min-width: 56px; height: 50px; padding: 4px 12px; border-radius: 14px; border: 2px solid #ddd;
+  background: white; font-size: 1.2rem; cursor: pointer; transition: all 0.15s;
   touch-action: manipulation;
   font-family: 'Baloo Bhaijaan 2', 'Fredoka', sans-serif;
 }
@@ -253,7 +253,7 @@ canvas.write-canvas {
   .menu-card { padding: 20px; }
   .letter-chip, .answer-slot { width: 56px; height: 56px; font-size: 1.8rem; }
   .french-word { font-size: 2rem; }
-  .model-letter { font-size: 4rem; }
+  .model-letter { font-size: 2.5rem; }
   .game-card { padding: 20px; }
   .btn { padding: 14px 24px; }
 }
@@ -268,7 +268,7 @@ canvas.write-canvas {
   .article-btn { padding: 16px 40px; font-size: 1.6rem; }
   .btn { padding: 16px 34px; font-size: 1.2rem; min-height: 52px; }
   .back-btn { padding: 14px 26px; font-size: 1.1rem; }
-  .letter-select-btn { width: 60px; height: 60px; font-size: 1.7rem; }
+  .letter-select-btn { min-width: 60px; height: 54px; font-size: 1.1rem; }
   .mic-btn { width: 110px; height: 110px; font-size: 3rem; }
   .listen-btn { width: 80px; height: 80px; font-size: 2.4rem; }
   canvas.write-canvas { height: 300px; }
@@ -582,24 +582,29 @@ const frenchQuestions = [
 ];
 
 const arabicLetters = [
-  { letter: '\u0627', name: '\u0623\u0644\u0641' },
-  { letter: '\u0628', name: '\u0628\u0627\u0621' },
-  { letter: '\u062A', name: '\u062A\u0627\u0621' },
-  { letter: '\u062F', name: '\u062F\u0627\u0644' },
-  { letter: '\u0631', name: '\u0631\u0627\u0621' },
-  { letter: '\u0632', name: '\u0632\u0627\u064A' },
-  { letter: '\u0633', name: '\u0633\u064A\u0646' },
-  { letter: '\u0634', name: '\u0634\u064A\u0646' },
-  { letter: '\u0648', name: '\u0648\u0627\u0648' },
-  { letter: '\u064A', name: '\u064A\u0627\u0621' },
+  { letter: '\u0628\u062F\u0631', name: '\u0642\u0645\u0631 \u0645\u0636\u064A\u0621' },
+  { letter: '\u062F\u0628\u0633', name: '\u062D\u0644\u0648 \u0648\u0644\u0630\u064A\u0630' },
+  { letter: '\u062A\u0631\u0627\u0628', name: '\u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636' },
+  { letter: '\u0633\u0631\u0648\u0631', name: '\u0641\u0631\u062D' },
+  { letter: '\u0628\u0631\u062F\u062A', name: '\u0635\u0627\u0631 \u0628\u0631\u062F' },
+  { letter: '\u062A\u062F\u0648\u0631', name: '\u062A\u0644\u0641 \u0648\u062A\u062F\u0648\u0631' },
+  { letter: '\u0632\u0631\u0628\u062A', name: '\u0623\u063A\u0644\u0642\u062A \u0627\u0644\u0632\u0631' },
+  { letter: '\u0631\u0627\u0634\u062F', name: '\u0627\u0633\u0645 \u0648\u0644\u062F' },
+  { letter: '\u062F\u0628\u062F\u0648\u0628', name: '\u062F\u0628 \u0644\u0637\u064A\u0641' },
 ];
 
 // Only letters learned: D T M L C + A E I O U
 const frenchLetters = [
-  { letter: 'd', name: 'D' }, { letter: 't', name: 'T' }, { letter: 'm', name: 'M' },
-  { letter: 'l', name: 'L' }, { letter: 'c', name: 'C' },
-  { letter: 'a', name: 'A' }, { letter: 'e', name: 'E' }, { letter: 'i', name: 'I' },
-  { letter: 'o', name: 'O' }, { letter: 'u', name: 'U' },
+  { letter: 'tomate', name: 'tomate' },
+  { letter: 'lama', name: 'lama' },
+  { letter: 'dame', name: 'dame' },
+  { letter: 'auto', name: 'auto' },
+  { letter: 'moto', name: 'moto' },
+  { letter: 'midi', name: 'midi' },
+  { letter: 'dodo', name: 'dodo' },
+  { letter: 'mule', name: 'mule' },
+  { letter: 'lime', name: 'lime' },
+  { letter: 'clou', name: 'clou' },
 ];
 
 // === STATE ===
@@ -891,12 +896,22 @@ function initCanvas() {
   window.addEventListener('resize', () => { if (canvasReady) { setupCanvas(); } });
 }
 
+function getGuideFontSize(ctx, text, maxWidth, maxHeight) {
+  let fontSize = maxHeight * 0.7;
+  ctx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
+  let measured = ctx.measureText(text).width;
+  if (measured > maxWidth * 0.85) {
+    fontSize = fontSize * (maxWidth * 0.85) / measured;
+  }
+  return fontSize;
+}
+
 function drawGuideLetter(canvas, ctx) {
   const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
   const item = list[currentWriteLetter];
   if (!item) return;
   const rect = canvas.getBoundingClientRect();
-  const fontSize = Math.min(rect.width, rect.height) * 0.7;
+  const fontSize = getGuideFontSize(ctx, item.letter, rect.width, rect.height);
   ctx.save();
   ctx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
   ctx.fillStyle = 'rgba(180, 180, 180, 0.35)';
@@ -922,7 +937,7 @@ function getGuidePixels(canvas) {
   const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
   const item = list[currentWriteLetter];
   if (!item) return null;
-  const fontSize = Math.min(rect.width, rect.height) * 0.7;
+  const fontSize = getGuideFontSize(octx, item.letter, rect.width, rect.height);
   octx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
   octx.fillStyle = '#000000';
   octx.textAlign = 'center';
