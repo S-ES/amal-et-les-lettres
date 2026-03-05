@@ -218,6 +218,7 @@ canvas.write-canvas {
 }
 .feedback.correct { background: var(--violet-light); color: #4A148C; }
 .feedback.wrong { background: var(--pink-light); color: #AD1457; }
+.connected-word { display: block; font-size: 4.5rem; line-height: 1.2; margin-top: 8px; font-family: 'Noto Sans Arabic', 'Segoe UI', Arial, sans-serif; }
 
 /* === CELEBRATION === */
 .celebration {
@@ -714,9 +715,9 @@ function checkArabicAnswer() {
     return;
   }
   if (attempt === q.word) {
-    document.getElementById('arabicFeedback').innerHTML = '<div class="feedback correct">&#10004; \u0645\u0645\u062A\u0627\u0632! ' + q.word + '</div>';
+    document.getElementById('arabicFeedback').innerHTML = '<div class="feedback correct">&#10004; \u0645\u0645\u062A\u0627\u0632!<br><span class="connected-word">' + q.word + '</span></div>';
     addStars(1); playCorrectSound(); spawnConfetti(); sayBravo('ar');
-    setTimeout(() => { arabicIndex++; loadArabicQuestion(); }, 1500);
+    setTimeout(() => { arabicIndex++; loadArabicQuestion(); }, 2500);
   } else {
     document.getElementById('arabicFeedback').innerHTML = '<div class="feedback wrong">&#10008; \u062D\u0627\u0648\u0644\u064A \u0645\u0631\u0629 \u0623\u062E\u0631\u0649!</div>';
     playWrongSound(); shakeElement(document.getElementById('answerSlots'));
@@ -890,10 +891,49 @@ function initCanvas() {
   window.addEventListener('resize', () => { if (canvasReady) { setupCanvas(); } });
 }
 
+function drawGuideLetter(canvas, ctx) {
+  const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
+  const item = list[currentWriteLetter];
+  if (!item) return;
+  const rect = canvas.getBoundingClientRect();
+  const fontSize = Math.min(rect.width, rect.height) * 0.7;
+  ctx.save();
+  ctx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
+  ctx.fillStyle = 'rgba(180, 180, 180, 0.35)';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.setLineDash([8, 6]);
+  ctx.strokeStyle = 'rgba(150, 150, 150, 0.45)';
+  ctx.lineWidth = 2;
+  ctx.fillText(item.letter, rect.width / 2, rect.height / 2);
+  ctx.strokeText(item.letter, rect.width / 2, rect.height / 2);
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+function getGuidePixels(canvas) {
+  const offscreen = document.createElement('canvas');
+  offscreen.width = canvas.width;
+  offscreen.height = canvas.height;
+  const octx = offscreen.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  octx.scale(dpr, dpr);
+  const rect = canvas.getBoundingClientRect();
+  const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
+  const item = list[currentWriteLetter];
+  if (!item) return null;
+  const fontSize = Math.min(rect.width, rect.height) * 0.7;
+  octx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
+  octx.fillStyle = '#000000';
+  octx.textAlign = 'center';
+  octx.textBaseline = 'middle';
+  octx.fillText(item.letter, rect.width / 2, rect.height / 2);
+  return octx.getImageData(0, 0, offscreen.width, offscreen.height);
+}
+
 function clearCanvas() {
   const canvas = document.getElementById('writeCanvas');
   const ctx = canvas.getContext('2d');
-  // Re-setup to get correct dimensions (screen may have been hidden before)
   const rect = canvas.getBoundingClientRect();
   if (rect.width > 0) {
     const dpr = window.devicePixelRatio || 1;
@@ -906,6 +946,7 @@ function clearCanvas() {
     ctx.lineJoin = 'round';
     ctx.strokeStyle = '#000000';
     canvasReady = true;
+    drawGuideLetter(canvas, ctx);
   }
   hasDrawn = false;
 }
@@ -916,13 +957,37 @@ function submitWriting() {
     document.getElementById('writeFeedback').innerHTML = '<div class="feedback wrong">' + msg + '</div>';
     return;
   }
-  const msg = writeMode === 'arabic' ? '&#10004; \u0623\u062D\u0633\u0646\u062A\u0650! +1 \u0646\u062C\u0645\u0629' : '&#10004; Tr\u00e8s bien ! +1 \u00e9toile';
-  document.getElementById('writeFeedback').innerHTML = '<div class="feedback correct">' + msg + '</div>';
-  addStars(1); playCorrectSound(); spawnConfetti(); hasDrawn = false;
-  sayBravo(writeMode === 'arabic' ? 'ar' : 'fr');
-  const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
-  if (currentWriteLetter < list.length - 1) {
-    setTimeout(() => selectWriteLetter(currentWriteLetter + 1), 1200);
+  const canvas = document.getElementById('writeCanvas');
+  const ctx = canvas.getContext('2d');
+  const drawnData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const guideData = getGuidePixels(canvas);
+
+  let guidePixels = 0, overlapPixels = 0;
+  if (guideData) {
+    for (let i = 3; i < guideData.data.length; i += 4) {
+      const isGuide = guideData.data[i] > 50;
+      const isDrawn = drawnData.data[i] > 50;
+      if (isGuide) guidePixels++;
+      if (isGuide && isDrawn) overlapPixels++;
+    }
+  }
+
+  const overlapRatio = guidePixels > 0 ? overlapPixels / guidePixels : 0;
+  const isCorrect = overlapRatio >= 0.35;
+
+  if (isCorrect) {
+    const msg = writeMode === 'arabic' ? '&#10004; \u0623\u062D\u0633\u0646\u062A\u0650! +1 \u0646\u062C\u0645\u0629' : '&#10004; Tr\u00e8s bien ! +1 \u00e9toile';
+    document.getElementById('writeFeedback').innerHTML = '<div class="feedback correct">' + msg + '</div>';
+    addStars(1); playCorrectSound(); spawnConfetti(); hasDrawn = false;
+    sayBravo(writeMode === 'arabic' ? 'ar' : 'fr');
+    const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
+    if (currentWriteLetter < list.length - 1) {
+      setTimeout(() => selectWriteLetter(currentWriteLetter + 1), 1200);
+    }
+  } else {
+    const msg = writeMode === 'arabic' ? '&#10008; \u062D\u0627\u0648\u0644\u064A \u062A\u062A\u0628\u0639\u064A \u0627\u0644\u062D\u0631\u0641! | Suis le mod\u00e8le !' : '&#10008; Essaie de suivre la lettre !';
+    document.getElementById('writeFeedback').innerHTML = '<div class="feedback wrong">' + msg + '</div>';
+    playWrongSound();
   }
 }
 
