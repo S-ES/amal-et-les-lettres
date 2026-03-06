@@ -918,6 +918,8 @@ function initCanvas() {
   window.addEventListener('resize', () => { if (canvasReady) { setupCanvas(); } });
 }
 
+function stripHarakat(s) { return s.replace(/[\u064B-\u065F\u0670\u0652]/g, ''); }
+
 function getGuideFontSize(ctx, text, maxWidth, maxHeight) {
   let fontSize = maxHeight * 0.7;
   ctx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
@@ -932,8 +934,9 @@ function drawGuideLetter(canvas, ctx) {
   const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
   const item = list[currentWriteLetter];
   if (!item) return;
+  const guideText = writeMode === 'arabic' ? stripHarakat(item.letter) : item.letter;
   const rect = canvas.getBoundingClientRect();
-  const fontSize = getGuideFontSize(ctx, item.letter, rect.width, rect.height);
+  const fontSize = getGuideFontSize(ctx, guideText, rect.width, rect.height);
   ctx.save();
   ctx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
   ctx.fillStyle = 'rgba(180, 180, 180, 0.35)';
@@ -942,8 +945,8 @@ function drawGuideLetter(canvas, ctx) {
   ctx.setLineDash([8, 6]);
   ctx.strokeStyle = 'rgba(150, 150, 150, 0.45)';
   ctx.lineWidth = 2;
-  ctx.fillText(item.letter, rect.width / 2, rect.height / 2);
-  ctx.strokeText(item.letter, rect.width / 2, rect.height / 2);
+  ctx.fillText(guideText, rect.width / 2, rect.height / 2);
+  ctx.strokeText(guideText, rect.width / 2, rect.height / 2);
   ctx.setLineDash([]);
   ctx.restore();
 }
@@ -959,12 +962,13 @@ function getGuidePixels(canvas) {
   const list = writeMode === 'arabic' ? arabicLetters : frenchLetters;
   const item = list[currentWriteLetter];
   if (!item) return null;
-  const fontSize = getGuideFontSize(octx, item.letter, rect.width, rect.height);
+  const guideText = writeMode === 'arabic' ? stripHarakat(item.letter) : item.letter;
+  const fontSize = getGuideFontSize(octx, guideText, rect.width, rect.height);
   octx.font = fontSize + 'px "Noto Sans Arabic", "Segoe UI", Arial, sans-serif';
   octx.fillStyle = '#000000';
   octx.textAlign = 'center';
   octx.textBaseline = 'middle';
-  octx.fillText(item.letter, rect.width / 2, rect.height / 2);
+  octx.fillText(guideText, rect.width / 2, rect.height / 2);
   return octx.getImageData(0, 0, offscreen.width, offscreen.height);
 }
 
