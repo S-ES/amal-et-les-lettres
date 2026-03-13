@@ -535,6 +535,10 @@ const arabicWords = [
   { letters: ['زَ','رَ','بَ','تْ'], word: 'زَرَبَتْ', hint: 'أغلقت الزر' },
   { letters: ['بَ','دْ','رْ'], word: 'بَدْرْ', hint: 'قمر مضيء' },
   { letters: ['رَ','ا','شِ','دْ'], word: 'رَاشِدْ', hint: 'اسم ولد' },
+  { letters: ['نَ','ا','رْ'], word: 'نَارْ', hint: 'حارة ومضيئة' },
+  { letters: ['نُ','و','رْ'], word: 'نُورْ', hint: 'ضوء' },
+  { letters: ['بَ','نَ','ا','تْ'], word: 'بَنَاتْ', hint: 'صبايا' },
+  { letters: ['زَ','يْ','تُ','و','نْ'], word: 'زَيْتُونْ', hint: 'ثمرة خضراء' },
 ];
 
 const speakWords = [
@@ -550,6 +554,10 @@ const speakWords = [
   { word: 'رَاشِدْ', hint: 'اسم ولد' },
   { word: 'دُبْدُوبْ', hint: 'دب لطيف' },
   { word: 'تَدُورُ', hint: 'تلف وتدور' },
+  { word: 'نَارْ', hint: 'حارة ومضيئة' },
+  { word: 'نُورْ', hint: 'ضوء' },
+  { word: 'بَنَاتْ', hint: 'صبايا' },
+  { word: 'زَيْتُونْ', hint: 'ثمرة خضراء' },
 ];
 
 // Only letters learned: D T M L C + A E I O U
@@ -579,6 +587,11 @@ const frenchQuestions = [
   { type: 'vowel', display: 'p_nda', answer: 'a', choices: ['a','o','i','u','e'], full: 'panda', image: 'panda' },
   { type: 'vowel', display: 'b_ugie', answer: 'o', choices: ['a','o','i','u','e'], full: 'bougie', image: 'bougie' },
   { type: 'vowel', display: 'l_pin', answer: 'a', choices: ['a','o','i','u','e'], full: 'lapin', image: 'lapin' },
+  { type: 'vowel', display: 'c_lis', answer: 'o', choices: ['a','o','i','u','e'], full: 'colis', image: 'colis' },
+  { type: 'vowel', display: 't_sse', answer: 'a', choices: ['a','o','i','u','e'], full: 'tasse', image: 'tasse' },
+  { type: 'vowel', display: 'c_lotte', answer: 'u', choices: ['a','o','i','u','e'], full: 'culotte', image: 'culotte' },
+  { type: 'vowel', display: 'sal_de', answer: 'a', choices: ['a','o','i','u','e'], full: 'salade', image: 'salade' },
+  { type: 'vowel', display: 'c_lle', answer: 'o', choices: ['a','o','i','u','e'], full: 'colle', image: 'colle' },
   // Article (un / une)
   { type: 'article', word: 'tomate', answer: 'une', image: 'tomate' },
   { type: 'article', word: 'lama', answer: 'un', image: 'lama' },
@@ -595,6 +608,18 @@ const frenchQuestions = [
   { type: 'article', word: 'bougie', answer: 'une', image: 'bougie' },
   { type: 'article', word: 'lit', answer: 'un', image: 'lit' },
   { type: 'article', word: 'os', answer: 'un', image: 'os' },
+  { type: 'article', word: 'colis', answer: 'un', image: 'colis' },
+  { type: 'article', word: 'tasse', answer: 'une', image: 'tasse' },
+  { type: 'article', word: 'culotte', answer: 'une', image: 'culotte' },
+  { type: 'article', word: 'salade', answer: 'une', image: 'salade' },
+  { type: 'article', word: 'colle', answer: 'une', image: 'colle' },
+  { type: 'article', word: 'caddie', answer: 'un', image: 'caddie' },
+  // "a" vs "est" sentences
+  { type: 'a_est', display: 'Toto ..... calme.', answer: 'est', full: 'Toto est calme.' },
+  { type: 'a_est', display: 'Mila ..... un caddie.', answer: 'a', full: 'Mila a un caddie.' },
+  { type: 'a_est', display: 'La salade ..... sale.', answer: 'est', full: 'La salade est sale.' },
+  { type: 'a_est', display: 'Le lit ..... solide.', answer: 'est', full: 'Le lit est solide.' },
+  { type: 'a_est', display: 'Sola ..... une colle.', answer: 'a', full: 'Sola a une colle.' },
 ];
 
 const arabicLetters = [
@@ -607,6 +632,10 @@ const arabicLetters = [
   { letter: 'زَرَبَتْ', name: 'أغلقت الزر' },
   { letter: 'رَاشِدْ', name: 'اسم ولد' },
   { letter: 'دُبْدُوبْ', name: 'دب لطيف' },
+  { letter: 'نَارْ', name: 'حارة ومضيئة' },
+  { letter: 'نُورْ', name: 'ضوء' },
+  { letter: 'بَنَاتْ', name: 'صبايا' },
+  { letter: 'زَيْتُونْ', name: 'ثمرة خضراء' },
 ];
 
 // Only letters learned: D T M L C + A E I O U
@@ -627,6 +656,11 @@ const frenchLetters = [
   { letter: 'lapin', name: 'lapin' },
   { letter: 'bougie', name: 'bougie' },
   { letter: 'table', name: 'table' },
+  { letter: 'colis', name: 'colis' },
+  { letter: 'tasse', name: 'tasse' },
+  { letter: 'culotte', name: 'culotte' },
+  { letter: 'salade', name: 'salade' },
+  { letter: 'colle', name: 'colle' },
 ];
 
 // === STATE ===
@@ -798,6 +832,16 @@ function loadFrenchQuestion() {
       btn.onclick = () => checkFrenchAnswer(c, q);
       choicesDiv.appendChild(btn);
     });
+  } else if (q.type === 'a_est') {
+    display.innerHTML = q.display.replace('.....', '<span class="blank">&nbsp;</span>');
+    instruction.textContent = '\u00c9cris a ou est :';
+    imageLabel.textContent = '';
+    ['a', 'est'].forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'article-btn'; btn.textContent = c;
+      btn.onclick = () => checkFrenchAnswer(c, q);
+      choicesDiv.appendChild(btn);
+    });
   }
 }
 
@@ -806,6 +850,7 @@ function checkFrenchAnswer(chosen, q) {
   const display = document.getElementById('frenchWordDisplay');
   if (chosen === q.answer) {
     if (q.type === 'article') display.textContent = q.answer + ' ' + q.word;
+    else if (q.type === 'a_est') display.textContent = q.full;
     else display.textContent = q.full;
     fb.innerHTML = '<div class="feedback correct">&#10004; Bravo !</div>';
     addStars(1); playCorrectSound(); spawnConfetti(); sayBravo('fr');
