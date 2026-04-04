@@ -191,16 +191,18 @@
   }
 
   .write-row {
-    height: 19mm;
+    /* Total row = writing zone (15mm, 3 equal bands of 5mm) + white gap (7mm) */
+    height: 22mm;
     width: 100%;
     background-image:
       linear-gradient(to bottom, #d9521e 0, #d9521e 1.3px, transparent 1.3px),
       linear-gradient(to bottom, #5ab9d9 0, #5ab9d9 1px,   transparent 1px),
       linear-gradient(to bottom, #2778b0 0, #2778b0 1px,   transparent 1px),
       linear-gradient(to bottom, #9c2020 0, #9c2020 1.3px, transparent 1.3px);
-    background-size: 100% 19mm;
+    background-size: 100% 22mm;
     background-repeat: no-repeat;
-    background-position: 0 0, 0 6.5mm, 0 7.5mm, 0 13mm;
+    /* line 1 at 0 | line 2 at 5mm | line 3 at 10mm | line 4 at 15mm | gap 7mm */
+    background-position: 0 0, 0 5mm, 0 10mm, 0 15mm;
   }
 
   /* ── SECTION DIVIDER ─────────────────────────── */
