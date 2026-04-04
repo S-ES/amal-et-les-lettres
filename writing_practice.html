@@ -179,49 +179,29 @@
     direction: rtl;
   }
 
-  /* ── WRITING LINES ───────────────────────────── */
+  /* ── WRITING LINES — 4-line Arabic handwriting format ── */
+  /*   line 1: orange-red (top boundary)                   */
+  /*   line 2: light blue (upper body guide)               */
+  /*   line 3: blue       (lower body guide)               */
+  /*   line 4: dark red   (baseline)                       */
   .writing-lines {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
 
-  .line-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .write-line {
-    border: none;
-    border-bottom: 1.5px solid #bbb;
-    height: 13mm;
+  .write-row {
+    height: 19mm;
     width: 100%;
-    background: repeating-linear-gradient(
-      transparent,
-      transparent 12mm,
-      #eee 12mm,
-      #eee 12.5mm
-    );
+    background-image:
+      linear-gradient(to bottom, #d9521e 0, #d9521e 1.3px, transparent 1.3px),
+      linear-gradient(to bottom, #5ab9d9 0, #5ab9d9 1px,   transparent 1px),
+      linear-gradient(to bottom, #2778b0 0, #2778b0 1px,   transparent 1px),
+      linear-gradient(to bottom, #9c2020 0, #9c2020 1.3px, transparent 1.3px);
+    background-size: 100% 19mm;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 6.5mm, 0 7.5mm, 0 13mm;
   }
-
-  /* dashed helper line at mid-height */
-  .write-line-dashed {
-    border: none;
-    border-bottom: 1px dashed #ddd;
-    height: 6.5mm;
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  /* combined ruled line pair */
-  .ruled-pair {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ruled-pair .top { border-bottom: 1px dashed #ccc; height: 6.5mm; }
-  .ruled-pair .bottom { border-bottom: 2px solid #aaa; height: 6.5mm; }
 
   /* ── SECTION DIVIDER ─────────────────────────── */
   .section-label {
@@ -309,9 +289,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -323,9 +303,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -337,9 +317,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -351,9 +331,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -410,9 +390,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -424,9 +404,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -438,9 +418,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -452,9 +432,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -511,9 +491,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -525,9 +505,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -539,9 +519,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -553,9 +533,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -612,9 +592,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -626,9 +606,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -640,9 +620,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
@@ -654,9 +634,9 @@
       </div>
       <div class="section-label">اكتب الكلمة ثلاث مرات:</div>
       <div class="writing-lines">
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
-        <div class="ruled-pair"><div class="top"></div><div class="bottom"></div></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
+        <div class="write-row"></div>
       </div>
     </div>
 
